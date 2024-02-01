@@ -19,9 +19,12 @@ export const startCLI = async () => {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
-        prompt: `\nYou are currently in ${pathToHomeDirectory}\n`
+        prompt: `\x1b[33m\nYou are currently in ${pathToHomeDirectory}\x1b[0m\n`
+        // prompt: `\nYou are currently in ${pathToHomeDirectory}\n`
     });
-    console.log('\x1b[36m%s\x1b[0m', `Welcome to the File Manager, ${userName}!`);
+    // console.log('\x1b[36m%s\x1b[0m', `Welcome to the File Manager, ${userName}!`);
+
+    console.log(`\x1b[36mWelcome to the File Manager, \x1b[35m${userName}!\x1b[0m`);
     // Display the prompt
         rl.prompt();
 
@@ -43,7 +46,8 @@ export const startCLI = async () => {
     });
 
     rl.on('SIGINT', () => {
-        console.log('\x1b[31m%s\x1b[0m', `Thank you for using File Manager, ${userName}, goodbye!`);
+        // console.log('\x1b[31m%s\x1b[0m', `Thank you for using File Manager, ${userName}, goodbye!`);
+        console.log(`\x1b[31mThank you for using File Manager, \x1b[94m${userName}, \x1b[31mgoodbye!\x1b[0m`);
         process.exit(0);
     });
 }

@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1d8bfbf-4980-4da5-a653-f81f55aa112f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ .gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ .gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileForHash.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fileForHash.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/hashExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/hashExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/zlibExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/zlibExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +58,7 @@
       <updated>1706690597033</updated>
       <workItem from="1706690598399" duration="33000" />
       <workItem from="1706690638588" duration="26032000" />
-      <workItem from="1706774720905" duration="15197000" />
+      <workItem from="1706774720905" duration="23958000" />
     </task>
     <servers />
   </component>

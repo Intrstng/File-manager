@@ -24,7 +24,6 @@ export class HashExecutor {
     calculateHash = async() => {
         if (this.#args.length > 0) {
             this.#destinationFilePath = this.#getPathToFileForHashFromArgs(this.#args[0]);
-            console.log(this.#destinationFilePath)
             const hash = createHash('sha256');
             const input = await createReadStream(this.#destinationFilePath);
 
@@ -39,11 +38,11 @@ export class HashExecutor {
             });
 
             input.on('error', (error) => {
-                console.log('Operation failed:');
-                console.log(error.message)
+                console.log('\x1b[31mOperation failed:\x1b[0m');
+                console.log(error.message);
             });
         } else {
-            console.log('Invalid input');
+            console.log('\x1b[91mInvalid input\x1b[0m');
         }
     };
 }

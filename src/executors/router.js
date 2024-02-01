@@ -1,10 +1,12 @@
 import {HashExecutor} from './hashExecutor.js';
 import {parseInputArguments} from '../utils/parseInputArguments.js';
+import {ZlibExecutor} from './zlibExecutor.js';
 
 export const router = (inputArgs) => {
     const [action, ...args] = inputArgs;
 
-    const hashFn = new HashExecutor(args);
+    const hash = new HashExecutor(args);
+    const zlib = new ZlibExecutor(args);
 
     const commands = {
         // fs
@@ -18,7 +20,7 @@ export const router = (inputArgs) => {
         'mv': 'moveFile',
         'rm': 'removeFile',
         // Hash
-        'hash': hashFn.calculateHash,
+        'hash': hash.calculateHash,
         // Navigation
         'up': 'up',
         'cd': 'cd',
@@ -30,7 +32,7 @@ export const router = (inputArgs) => {
         '--username': 'getSysUsername',
         '--architecture': 'getSysArch',
         // ZLib
-        'compress': 'compress',
+        'compress': zlib.compressWithBrotli,
         'decompress': 'decompress',
     };
 
@@ -39,11 +41,11 @@ export const router = (inputArgs) => {
     if (inputArgs[0] === 'os' && commands[args[0]]) {
         console.log(`Your OS input ${inputArgs[0]} ${commands[args[0]]}`); // change to action
     } else if (inputArgs[0] === 'os' && !commands[args[0]]) {
-        console.log('Invalid input');
+        console.log('\x1b[91mInvalid input\x1b[0m');
     } else if (commands[action]) {
         //console.log(`Your input ${commands[action]}`);   // change to action
         commands[action]();
     } else {
-        console.log('Invalid input');
+        console.log('\x1b[91mInvalid input\x1b[0m');
     }
 };
