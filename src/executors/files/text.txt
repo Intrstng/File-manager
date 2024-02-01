@@ -1,0 +1,5 @@
+You can also use this file to calculate hash.
+
+
+command if your CWD is app root directory:
+hash ./src/executors/files/text.txt

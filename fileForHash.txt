@@ -1,0 +1,6 @@
+Please use this file to calculate it`s hash or specify the path to your own file.
+
+
+command:
+
+hash fileForHash.txt
