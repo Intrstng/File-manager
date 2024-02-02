@@ -16,7 +16,7 @@ export const router = (inputArgs) => {
         'cat': function () {
             console.log('cat2024')
         },
-        'add': 'createEmptyFile',
+        'add': fs.createEmptyFile,
         'rn': 'renameFile',
         'cp': fs.copyFile,
         'mv': fs.moveFile,
