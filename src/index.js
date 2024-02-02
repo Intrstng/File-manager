@@ -1,10 +1,10 @@
 import path from 'path';
-import {getUserNameFromArgs} from './utils/getUserNameFromArgs.js';
+import { getUserNameFromArgs } from './utils/getUserNameFromArgs.js';
 import * as readline from 'node:readline/promises';
 import os from 'os';
 import process from 'node:process';
-import {parseInputArguments} from './utils/parseInputArguments.js';
-import {router} from './executors/router.js';
+import { parseInputArguments } from './utils/parseInputArguments.js';
+import { router } from './executors/router.js';
 
 
 export const startCLI = async () => {

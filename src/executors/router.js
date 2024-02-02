@@ -1,12 +1,14 @@
-import {HashExecutor} from './hashExecutor.js';
+import { HashExecutor } from './hashExecutor.js';
 import {parseInputArguments} from '../utils/parseInputArguments.js';
-import {ZlibExecutor} from './zlibExecutor.js';
+import { ZlibExecutor } from './zlibExecutor.js';
+import { FsExecutor } from './fsExecutor.js';
 
 export const router = (inputArgs) => {
     const [action, ...args] = inputArgs;
 
     const hash = new HashExecutor(args);
     const zlib = new ZlibExecutor(args);
+    const fs = new FsExecutor(args);
 
     const commands = {
         // fs
@@ -16,9 +18,9 @@ export const router = (inputArgs) => {
         },
         'add': 'createEmptyFile',
         'rn': 'renameFile',
-        'cp': 'copyFile',
+        'cp': fs.copy,
         'mv': 'moveFile',
-        'rm': 'removeFile',
+        'rm': fs.delete,
         // Hash
         'hash': hash.calculateHash,
         // Navigation
@@ -33,7 +35,7 @@ export const router = (inputArgs) => {
         '--architecture': 'getSysArch',
         // ZLib
         'compress': zlib.compressWithBrotli,
-        'decompress': 'decompress',
+        'decompress': zlib.deCompressWithBrotli,
     };
 
 
