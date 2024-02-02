@@ -18,9 +18,9 @@ export const router = (inputArgs) => {
         },
         'add': 'createEmptyFile',
         'rn': 'renameFile',
-        'cp': fs.copy,
-        'mv': 'moveFile',
-        'rm': fs.delete,
+        'cp': fs.copyFile,
+        'mv': fs.moveFile,
+        'rm': fs.deleteFile,
         // Hash
         'hash': hash.calculateHash,
         // Navigation
