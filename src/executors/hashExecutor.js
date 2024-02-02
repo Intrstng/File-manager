@@ -9,7 +9,7 @@ export class HashExecutor extends Executor {
     constructor(args) {
         super();
         if (args.length > 0) {
-            this.#destinationFilePath = this._getPathToFileForHashFromArgs(args[0]);
+            this.#destinationFilePath = this._getPathToFileFromArgs(args[0]);
         }
     }
 

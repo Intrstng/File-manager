@@ -15,8 +15,8 @@ export class ZlibExecutor extends Executor {
         super();
         this.#args = args;
         if (this.#args.length > 1) {
-            this.#sourcePath = this._getPathToFileForHashFromArgs(this.#args[0]);
-            this.#destinationPath = this._getPathToFileForHashFromArgs(this.#args[1]);
+            this.#sourcePath = this._getPathToFileFromArgs(this.#args[0]);
+            this.#destinationPath = this._getPathToFileFromArgs(this.#args[1]);
         }
     }
 
