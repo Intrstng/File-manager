@@ -32,18 +32,26 @@ export const router = (inputArgs) => {
         '--cpus': os.getCPUs,
         '--homedir': os.getHomeDir,
         '--username': os.getSysUsername,
-        '--architecture': 'getSysArch',
+        '--architecture': os.getSysArch,
         // ZLib
         'compress': zlib.compressWithBrotli,
         'decompress': zlib.deCompressWithBrotli,
     };
 
-    if (inputArgs[0] === 'os' && commands[args[0]]) {
-        commands[args[0]]();
+    const errMsg = colorize('Invalid input', 91);
+
+    if (inputArgs[0] === 'os' && args.length === 0) {
+        console.log(errMsg);
+    } else if (inputArgs[0] === 'os') {
+        args.forEach(arg => {
+            commands.hasOwnProperty(arg)
+                ? commands[arg]()
+                : console.log(errMsg);
+        })
     } else if (commands[action]) {
         commands[action]();
     } else {
-        const errMsg = colorize('Invalid input', 91);
         console.log(errMsg);
     }
 };
+

@@ -27,7 +27,7 @@ export class OsExecutor extends Executor {
     getEOL = async () => {
         const defaultEOL = os.EOL;
         const msg = this._colorize('Default End-Of-Line (EOL) sequence: ', 92) +
-                    this._colorize(JSON.stringify(defaultEOL), 93);
+                    this._colorize(`${JSON.stringify(defaultEOL)}\n`, 93);
         await process.stdout.write(msg);
     }
 
@@ -44,13 +44,21 @@ export class OsExecutor extends Executor {
     }
 
     getHomeDir = async () => {
-        const homedir = this._colorize(os.homedir(), 96);
+        const homedir = this._colorize('Home directory: ', 92) +
+                        this._colorize(`${os.homedir()}\n`, 93);
         process.stdout.write(homedir);
     }
 
     getSysUsername = async () => {
-        const username = this._colorize(os.userInfo().username, 96);
+        const username =  this._colorize('System user name: ', 92) +
+                          this._colorize(`${os.userInfo().username}\n`, 93);
         process.stdout.write(username);
+    }
+
+    getSysArch = async () => {
+        const architecture =  this._colorize('CPU architecture: ', 92) +
+                              this._colorize(`${os.arch()}\n`, 93);
+        process.stdout.write(architecture);
     }
 
 }
@@ -74,6 +82,7 @@ export class OsExecutor extends Executor {
 // \x1b[96m: Bright cyan
 // \x1b[97m: Bright white
 
+// os --EOL --cpus --homedir --username --architecture
 
 
 
