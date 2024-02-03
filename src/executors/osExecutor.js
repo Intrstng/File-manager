@@ -19,9 +19,9 @@ export class OsExecutor extends Executor {
         process.stdout.write(msg);
         // console.log(os.cpus().length) - we can also use
         const data = os.cpus().map(({model, speed}) => ({
-                'Model': model.trim(),
-                'Clock rate (GHz)': speed / 1000
-            }));
+            'Model': model.trim(),
+            'Clock rate (GHz)': speed / 1000
+        }));
         console.table(data);
     }
 

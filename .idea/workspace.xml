@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/executors/navigationExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/navigationExecutor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/executors/osExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/osExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +57,7 @@
       <workItem from="1706690598399" duration="33000" />
       <workItem from="1706690638588" duration="26032000" />
       <workItem from="1706774720905" duration="25040000" />
-      <workItem from="1706818228323" duration="51608000" />
+      <workItem from="1706818228323" duration="54286000" />
     </task>
     <servers />
   </component>

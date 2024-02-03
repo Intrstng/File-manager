@@ -1,12 +1,10 @@
-import path, { basename } from 'path';
-import { readdir } from 'node:fs/promises';
-import { cwd } from 'node:process';
-import process from 'node:process';
-import { rm, access, stat } from 'node:fs/promises';
-import { Executor } from './executor.js';
+import path from 'path';
+import {readdir, stat} from 'node:fs/promises';
+import process, {cwd} from 'node:process';
+import {Executor} from './executor.js';
 
 export class NavigationExecutor extends Executor {
-    #name = 'hash';
+    #name = 'navigation';
     #destinationFilePath;
 
     constructor(args) {
@@ -16,19 +14,24 @@ export class NavigationExecutor extends Executor {
         }
     }
 
-    moveUp = async () => {
-
-    }
-
-    changeDir = async () => {
-
-    }
-
     #isDirectoryOrFile = async (destinationPath) => {
         const stats = await stat(destinationPath);
         return stats.isDirectory() ? 'directory' : stats.isFile()
-                                   ? 'file' : 'unknown';
+            ? 'file' : 'unknown';
     };
+
+    moveUp = async () => {
+        const pathToUpperDirectory = path.join(cwd(), '..');
+        process.chdir(pathToUpperDirectory);
+        console.log(cwd()) // !!!!!
+        //this._rl.setPrompt(`\nYou are currently in ${cwd()}\n`);
+    }
+
+    changeDir = async () => {
+        process.chdir(this.#destinationFilePath);
+        console.log(this.#destinationFilePath) // !!!!!
+        //this._rl.setPrompt(`\nYou are currently in ${cwd()}\n`);
+    }
 
     showList = async () => {
         try {
@@ -61,50 +64,21 @@ export class NavigationExecutor extends Executor {
 
             const tableData = [...sortedFolders, ...sortedFiles];
             console.table(tableData);
+
+            // ДОДЕЛАТЬ!!! После таблицы не показывает cwd()
+            // const rl = readline.createInterface({
+            //     input: process.stdin,
+            //     output: process.stdout,
+            //     prompt: colorize(`\nYou are currently in ${currentDir}\n`, 33)
+            //     //prompt: `\x1b[33m\nYou are currently in ${pathToHomeDirectory}\x1b[0m\n`
+            // });
+            // rl.prompt();
         } catch (error) {
             const errMsg = this._colorize('Operation failed:', 31);
             console.log(errMsg, error.message);
         }
-
-
-
-        // const dirnamePath = cwd();
-        // try {
-        //     const currentDir = cwd();
-        //     const items = await readdir(currentDir);
-        //
-        //     let dirContentArray = [];
-        //
-        //     for (let i = 0; i < items.length; i++) {
-        //         const itemPath = path.join(currentDir, data[i]);
-        //         // console.log(cwd())
-        //         // console.log(itemPath)
-        //         const type = await this.#isDirectoryOrFile(itemPath);
-        //         dirContentArray.push({
-        //             Name: data[i],
-        //             Type: type
-        //         });
-        //     }
-        //     // console.log(dirContentArray)
-        // } catch (err) {
-        //     console.error(err);
-        // }
     }
 }
-
-// const data = [
-//     { id: 1, name: 'John', age: 30 },
-//     { id: 2, name: 'Jane', age: 25 },
-//     { id: 3, name: 'Bob', age: 35 }
-// ];
-//
-// console.table(data);
-
-
-
-
-
-
 
 // \x1b[30m: Black
 // \x1b[31m: Red
