@@ -48,6 +48,11 @@ export class OsExecutor extends Executor {
         process.stdout.write(homedir);
     }
 
+    getSysUsername = async () => {
+        const username = this._colorize(os.userInfo().username, 96);
+        process.stdout.write(username);
+    }
+
 }
 
 // compress fileForHash.txt ./src/executors/files/some.gz
