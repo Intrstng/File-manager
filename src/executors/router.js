@@ -29,7 +29,7 @@ export const router = (inputArgs) => {
         'ls': 'ls',
         // OS
         '--EOL': os.getEOL,
-        '--cpus': 'getCPUs',
+        '--cpus': os.getCPUs,
         '--homedir': 'getHomeDir',
         '--username': 'getSysUsername',
         '--architecture': 'getSysArch',

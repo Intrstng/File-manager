@@ -30,9 +30,34 @@ export class OsExecutor extends Executor {
                     this._colorize(JSON.stringify(defaultEOL), 93);
         await process.stdout.write(msg);
     }
+
+    getCPUs = async () => {
+        const data = os.cpus().map(({model, speed}) => ({
+                'Model': model.trim(),
+                'Clock rate (GHz)': speed / 1000
+            }));
+        console.table(data);
+    }
 }
 
 // compress fileForHash.txt ./src/executors/files/some.gz
+
+// \x1b[30m: Black
+// \x1b[31m: Red
+// \x1b[32m: Green
+// \x1b[33m: Yellow
+// \x1b[34m: Blue
+// \x1b[35m: Magenta
+// \x1b[36m: Cyan
+// \x1b[37m: White
+// \x1b[90m: Bright black (gray)
+// \x1b[91m: Bright red
+// \x1b[92m: Bright green
+// \x1b[93m: Bright yellow
+// \x1b[94m: Bright blue
+// \x1b[95m: Bright magenta
+// \x1b[96m: Bright cyan
+// \x1b[97m: Bright white
 
 
 
