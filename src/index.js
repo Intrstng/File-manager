@@ -5,6 +5,7 @@ import os from 'os';
 import process from 'node:process';
 import { parseInputArguments } from './utils/parseInputArguments.js';
 import { router } from './executors/router.js';
+import { colorize } from './utils/colorize.js';
 
 
 export const startCLI = async () => {
@@ -19,12 +20,12 @@ export const startCLI = async () => {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
-        prompt: `\x1b[33m\nYou are currently in ${pathToHomeDirectory}\x1b[0m\n`
-        // prompt: `\nYou are currently in ${pathToHomeDirectory}\n`
+        prompt: colorize(`\nYou are currently in ${pathToHomeDirectory}\n`, 33)
+        //prompt: `\x1b[33m\nYou are currently in ${pathToHomeDirectory}\x1b[0m\n`
     });
-    // console.log('\x1b[36m%s\x1b[0m', `Welcome to the File Manager, ${userName}!`);
-
-    console.log(`\x1b[36mWelcome to the File Manager, \x1b[35m${userName}!\x1b[0m`);
+    const greetPhrase = colorize('Welcome to the File Manager, ', 36) +
+                        colorize(`${userName}!`, 35);
+    console.log(greetPhrase);
     // Display the prompt
         rl.prompt();
 
@@ -46,8 +47,10 @@ export const startCLI = async () => {
     });
 
     rl.on('SIGINT', () => {
-        // console.log('\x1b[31m%s\x1b[0m', `Thank you for using File Manager, ${userName}, goodbye!`);
-        console.log(`\x1b[31mThank you for using File Manager, \x1b[94m${userName}, \x1b[31mgoodbye!\x1b[0m`);
+        const exitPhrase =  colorize('Thank you for using File Manager, ', 31) +
+                            colorize(userName, 94) +
+                            colorize(' goodbye!', 31);
+        console.log(exitPhrase);
         process.exit(0);
     });
 }

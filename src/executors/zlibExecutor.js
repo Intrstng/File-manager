@@ -23,13 +23,15 @@ export class ZlibExecutor extends Executor {
     #compressDecompressReducer = (action) => {
         // If only one arg (#sourcePath) is entered, avoids crushing of app (due to invoking createWriteStream(this.#destinationPath))
         if (!this.#sourcePath || !this.#destinationPath) {
-            console.log('\x1b[91mInvalid input\x1b[0m');
+            const msg = this._colorize('Invalid input', 91);
+            console.log(msg);
             return;
         }
         // Avoids creating of new wrong file due to createWriteStream if #sourcePath is not valid
         access(this.#sourcePath, (error) => {
             if (error) {
-                console.log('\x1b[91mInvalid input: source path does not exist\x1b[0m');
+                const msg = this._colorize('Invalid input: source path does not exist', 91);
+                console.log(msg);
             } else {
                 const readStream = createReadStream(this.#sourcePath);
                 const writeStream = createWriteStream(this.#destinationPath);
@@ -39,10 +41,11 @@ export class ZlibExecutor extends Executor {
 
                 pipeline(readStream, compressDecompressStream, writeStream, (error) => {
                     if (error) {
-                        console.log('\x1b[31mOperation failed:\x1b[0m');
-                        console.error(error.message);
+                        const errMsg = this._colorize('Operation failed:', 31);
+                        console.error(errMsg, error.message);
                     } else {
-                        console.log(`\x1b[92m${action} complete.\x1b[0m`);
+                        const msg =  this._colorize(`${action} complete.`, 92);
+                        console.log(msg);
                     }
                 });
             }

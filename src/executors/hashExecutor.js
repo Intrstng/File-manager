@@ -15,7 +15,8 @@ export class HashExecutor extends Executor {
 
     calculateHash = async () => {
         if (!this.#destinationFilePath) {
-            console.log('\x1b[91mInvalid input\x1b[0m');
+            const msg = this._colorize('Invalid input', 91);
+            console.log(msg);
             return;
         }
         const hash = createHash('sha256');
@@ -32,8 +33,8 @@ export class HashExecutor extends Executor {
         });
 
         input.on('error', (error) => {
-            console.log('\x1b[31mOperation failed:\x1b[0m');
-            console.log(error.message);
+            const errMsg = this._colorize('Operation failed:', 31);
+            console.log(errMsg, error.message);
         });
     };
 }

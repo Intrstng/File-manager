@@ -1,7 +1,8 @@
 import path, { basename } from 'path';
 import process from 'node:process';
 import { rm, access, stat } from 'node:fs/promises';
-import {createReadStream, createWriteStream} from 'node:fs';
+import { createReadStream, createWriteStream } from 'node:fs';
+import fs from 'fs/promises';
 import { pipeline } from 'node:stream/promises';
 import { Executor } from './executor.js';
 
@@ -40,33 +41,19 @@ export class FsExecutor extends Executor {
         }
     };
 
-    deleteFile = async () => {
-        if (!this.#sourcePath) {
-            console.log('\x1b[91mInvalid input\x1b[0m');
-            return;
-        }
-        try {
-            await rm(this.#sourcePath, {
-                force: false,
-                recursive: true
-            });
-            console.log(`\x1b[90m${this.#sourceFileName}\x1b[92m\nDelete complete.\x1b[0m`);
-        } catch (error) {
-            console.log('\x1b[31mOperation failed:\x1b[0m', error.message);
-        }
-    }
-
     #checkIsDirectory = async (path) => {
         const isDirectory = await this.#isDestinationDirectory(path);
         if (!isDirectory) {
-            throw new Error('\x1b[91mInvalid destination path. Second argument must be path to a directory\x1b[0m');
+            const errMsg = this._colorize('Invalid destination path. Second argument must be path to a directory', 91);
+            throw new Error(errMsg);
         }
     }
 
     #checkIsFileExists = async (path) => {
         const fileExists = await this.#isFileExists(path);
         if (fileExists) {
-            throw new Error('\x1b[91mFile with the same name already exists in the destination directory\x1b[0m');
+            const errMsg = this._colorize('File with the same name already exists in the destination directory', 91);
+            throw new Error(errMsg);
         }
     }
 
@@ -77,14 +64,38 @@ export class FsExecutor extends Executor {
             const writeStream = createWriteStream(destinationFilePath);
             writeStream.write(innerData);
             writeStream.end();
-            console.log(`\x1b[92mThe file \x1b[97m${fileName}\x1b[92m has been created in the current working directory.\x1b[0m`);
+            const msg = this._colorize('The file ', 92) +
+                        this._colorize(fileName, 97) +
+                        this._colorize(' has been created in the current working directory.', 92);
+            console.log(msg);
         } catch (error) {
-            console.error('\x1b[31mOperation failed:\x1b[0m', error.message);
+            const errMsg = this._colorize('Operation failed:', 31);
+            console.log(errMsg, error.message);
         }
     }
 
     createEmptyFile = async () => {
         await this.#createFile(this.#args[0], '');
+    }
+
+    deleteFile = async () => {
+        if (!this.#sourcePath) {
+            const msg = this._colorize('Invalid input', 91);
+            console.log(msg);
+            return;
+        }
+        try {
+            await rm(this.#sourcePath, {
+                force: false,
+                recursive: true
+            });
+            const msg = this._colorize(this.#sourceFileName, 90) + ' \n' +
+                        this._colorize('Delete complete.', 92);
+            console.log(msg);
+        } catch (error) {
+            const errMsg = this._colorize('Operation failed:', 31);
+            console.log(errMsg, error.message);
+        }
     }
 
     copyFile = async () => {
@@ -96,9 +107,13 @@ export class FsExecutor extends Executor {
             const readStream = createReadStream(this.#sourcePath);
             const writeStream = createWriteStream(destinationPath);
             await pipeline(readStream, writeStream);
-            console.log(`\x1b[92mCopy \x1b[97m${this.#sourceFileName}\x1b[92m complete.\x1b[0m`);
+            const msg = this._colorize('Copy ', 92) +
+                        this._colorize(this.#sourceFileName, 97) +
+                        this._colorize(' complete.', 92);
+            console.log(msg);
         } catch (error) {
-            console.log('\x1b[31mOperation failed:\x1b[0m', error.message);
+            const errMsg = this._colorize('Operation failed:', 31);
+            console.log(errMsg, error.message);
         }
     }
 
@@ -112,9 +127,51 @@ export class FsExecutor extends Executor {
             const writeStream = createWriteStream(destinationPath);
             await pipeline(readStream, writeStream);
             await rm(this.#sourcePath);
-            console.log(`\x1b[92mFile \x1b[97m${this.#sourceFileName}\x1b[92m transfer completed\x1b[0m`);
+            const msg = this._colorize('File ', 92) +
+                        this._colorize(this.#sourceFileName, 97) +
+                        this._colorize(' transfer completed.', 92);
+            console.log(msg);
         } catch (error) {
-            console.log('\x1b[31mOperation failed:\x1b[0m', error.message);
+            const errMsg = this._colorize('Operation failed:', 31);
+            console.log(errMsg, error.message);
+        }
+    }
+
+    showFileContent = async () => {
+        const readStream = createReadStream(this.#sourcePath);
+        readStream.on('data', (chunk) => {
+            process.stdout.write(chunk + '\n');
+        });
+        readStream.on('error',(error) => {
+            const errMsg = this._colorize('File ', 31) +
+                           this._colorize(this.#sourceFileName, 97) +
+                           this._colorize(' read operation failed:', 31);
+            console.log(errMsg, error.message);
+        });
+    }
+
+    renameFile = async () => {
+        // if (!this.#destinationPath) {
+        // const msg = this._colorize('Invalid input', 91);
+        //     console.log(msg);
+        //     return;
+        // }
+        try {
+            const __dirname = path.dirname(this.#sourcePath);
+            const destinationFileName = basename(this.#destinationPath);
+            const __destinationFilePath = path.join(__dirname, destinationFileName);
+            await fs.rename(this.#sourcePath, __destinationFilePath);
+            const msg = this._colorize('Renaming file ', 92) +
+                        this._colorize(this.#sourceFileName, 37) +
+                        this._colorize(' to ', 92) +
+                        this._colorize(destinationFileName, 97) +
+                        this._colorize(' completed.', 92);
+            console.log(msg)
+        } catch (error) {
+            const errMsg = this._colorize('File ', 31) +
+                           this._colorize(this.#sourceFileName, 97) +
+                           this._colorize(' rename operation failed:', 31);
+            console.log(errMsg, error.message);
         }
     }
 }

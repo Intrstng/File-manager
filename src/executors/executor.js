@@ -9,4 +9,5 @@ export class Executor {
                 : path.join(cwd(), pathToFile);
         }
     }
+    _colorize = (text, colorCode) => `\x1b[${colorCode}m${text}\x1b[0m`;
 }
