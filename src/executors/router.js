@@ -3,6 +3,7 @@ import {parseInputArguments} from '../utils/parseInputArguments.js';
 import { ZlibExecutor } from './zlibExecutor.js';
 import { FsExecutor } from './fsExecutor.js';
 import { colorize } from '../utils/colorize.js';
+import {OsExecutor} from './osExecutor.js';
 
 export const router = (inputArgs) => {
     const [action, ...args] = inputArgs;
@@ -10,10 +11,10 @@ export const router = (inputArgs) => {
     const hash = new HashExecutor(args);
     const zlib = new ZlibExecutor(args);
     const fs = new FsExecutor(args);
+    const os = new OsExecutor(args);
 
     const commands = {
         // fs
-        //     'cat': 'readFile',
         'cat': fs.showFileContent,
         'add': fs.createEmptyFile,
         'rn': fs.renameFile,
@@ -27,7 +28,7 @@ export const router = (inputArgs) => {
         'cd': 'cd',
         'ls': 'ls',
         // OS
-        '--EOL': 'getEOL',
+        '--EOL': os.getEOL,
         '--cpus': 'getCPUs',
         '--homedir': 'getHomeDir',
         '--username': 'getSysUsername',
@@ -37,15 +38,12 @@ export const router = (inputArgs) => {
         'decompress': zlib.deCompressWithBrotli,
     };
 
-    const errMsg = colorize('Invalid input', 91);
-
     if (inputArgs[0] === 'os' && commands[args[0]]) {
-        console.log(`Your OS input ${inputArgs[0]} ${commands[args[0]]}`); // change to action
-    } else if (inputArgs[0] === 'os' && !commands[args[0]]) {
-        console.log(errMsg);
+        commands[args[0]]();
     } else if (commands[action]) {
         commands[action]();
     } else {
+        const errMsg = colorize('Invalid input', 91);
         console.log(errMsg);
     }
 };
