@@ -27,7 +27,8 @@ export const startCLI = async () => {
                         colorize(`${userName}!`, 35);
     console.log(greetPhrase);
     // Display the prompt
-        rl.prompt();
+    rl.prompt();
+    process.chdir(pathToHomeDirectory);
 
     rl.on('line', async (input) => {
         if (input === '.exit') {

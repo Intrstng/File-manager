@@ -4,6 +4,7 @@ import { ZlibExecutor } from './zlibExecutor.js';
 import { FsExecutor } from './fsExecutor.js';
 import { colorize } from '../utils/colorize.js';
 import {OsExecutor} from './osExecutor.js';
+import {NavigationExecutor} from './navigationExecutor.js';
 
 export const router = (inputArgs) => {
     const [action, ...args] = inputArgs;
@@ -12,6 +13,7 @@ export const router = (inputArgs) => {
     const zlib = new ZlibExecutor(args);
     const fs = new FsExecutor(args);
     const os = new OsExecutor(args);
+    const nav = new NavigationExecutor(args);
 
     const commands = {
         // fs
@@ -24,9 +26,9 @@ export const router = (inputArgs) => {
         // Hash
         'hash': hash.calculateHash,
         // Navigation
-        'up': 'up',
-        'cd': 'cd',
-        'ls': 'ls',
+        'up': nav.moveUp,
+        'cd': nav.changeDir,
+        'ls': nav.showList,
         // OS
         '--EOL': os.getEOL,
         '--cpus': os.getCPUs,
