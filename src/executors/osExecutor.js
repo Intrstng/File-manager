@@ -3,8 +3,8 @@ import { rm, access, stat } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import fs from 'fs/promises';
 import { pipeline } from 'node:stream/promises';
-import os from 'node:os';
 import process from 'node:process';
+import os from 'node:os';
 import { Executor } from './executor.js';
 
 export class OsExecutor extends Executor {
@@ -32,12 +32,22 @@ export class OsExecutor extends Executor {
     }
 
     getCPUs = async () => {
+        const msg = this._colorize('Overall amount of CPU\'s: ', 94) +
+                    this._colorize(`${os.availableParallelism()}\n`, 92);
+        process.stdout.write(msg);
+        // console.log(os.cpus().length) - we can also use
         const data = os.cpus().map(({model, speed}) => ({
                 'Model': model.trim(),
                 'Clock rate (GHz)': speed / 1000
             }));
         console.table(data);
     }
+
+    getHomeDir = async () => {
+        const homedir = this._colorize(os.homedir(), 96);
+        process.stdout.write(homedir);
+    }
+
 }
 
 // compress fileForHash.txt ./src/executors/files/some.gz

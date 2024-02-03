@@ -30,7 +30,7 @@ export const router = (inputArgs) => {
         // OS
         '--EOL': os.getEOL,
         '--cpus': os.getCPUs,
-        '--homedir': 'getHomeDir',
+        '--homedir': os.getHomeDir,
         '--username': 'getSysUsername',
         '--architecture': 'getSysArch',
         // ZLib
