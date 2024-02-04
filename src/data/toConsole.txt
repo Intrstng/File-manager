@@ -1,0 +1,4 @@
+This text should appear in the console when you call the command
+
+cat ./....
+with the path to this file.

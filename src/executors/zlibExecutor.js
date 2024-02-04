@@ -7,24 +7,25 @@ import {Executor} from './executor.js';
 
 export class ZlibExecutor extends Executor {
     #name = 'zlib';
-    #args;
-    #sourcePath;
-    #destinationPath;
+    #args = [];
+    #sourcePath = '';
+    #destinationPath = '';
 
-    constructor(args) {
-        super();
-        this.#args = args;
-        if (this.#args.length > 1) {
-            this.#sourcePath = this._getPathToFileFromArgs(this.#args[0]);
-            this.#destinationPath = this._getPathToFileFromArgs(this.#args[1]);
-        }
+    set args (value) {
+            this.#args = value;
+            if (this.#args.length > 1) {
+                this.#sourcePath = this._getPathToFileFromArgs(this.#args[0]);
+                this.#destinationPath = this._getPathToFileFromArgs(this.#args[1]);
+            } else {
+                this.#sourcePath = '';
+                this.#destinationPath = '';
+            }
     }
 
     #compressDecompressReducer = (action) => {
         // If only one arg (#sourcePath) is entered, avoids crushing of app (due to invoking createWriteStream(this.#destinationPath))
         if (!this.#sourcePath || !this.#destinationPath) {
-            const msg = this._colorize('Invalid input', 91);
-            console.log(msg);
+            console.log(this._errMsgInvalidInput);
             return;
         }
         // Avoids creating of new wrong file due to createWriteStream if #sourcePath is not valid
@@ -32,6 +33,7 @@ export class ZlibExecutor extends Executor {
             if (error) {
                 const msg = this._colorize('Invalid input: source path does not exist', 91);
                 console.log(msg);
+                this._prompt();
             } else {
                 const readStream = createReadStream(this.#sourcePath);
                 const writeStream = createWriteStream(this.#destinationPath);
@@ -41,26 +43,24 @@ export class ZlibExecutor extends Executor {
 
                 pipeline(readStream, compressDecompressStream, writeStream, (error) => {
                     if (error) {
-                        const errMsg = this._colorize('Operation failed:', 31);
-                        console.error(errMsg, error.message);
+                        console.error(this._errMsgOperationFailed, error.message);
                     } else {
                         const msg =  this._colorize(`${action} complete.`, 92);
                         console.log(msg);
+                        this._prompt();
                     }
                 });
             }
         })
     }
 
-    compressWithBrotli = () => {
+    compressWithBrotli = async () => {
         const action = 'Compression';
-        this.#compressDecompressReducer(action);
+        await this.#compressDecompressReducer(action, this.#sourcePath, this.#destinationPath);
     }
 
-    deCompressWithBrotli = () => {
+    deCompressWithBrotli = async () => {
         const action = 'Decompression';
-        this.#compressDecompressReducer(action);
+        await this.#compressDecompressReducer(action, this.#sourcePath, this.#destinationPath);
     }
 }
-
-// compress fileForHash.txt ./src/executors/files/some.gz

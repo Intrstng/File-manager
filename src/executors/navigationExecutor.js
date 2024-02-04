@@ -5,32 +5,42 @@ import {Executor} from './executor.js';
 
 export class NavigationExecutor extends Executor {
     #name = 'navigation';
-    #destinationFilePath;
+    #rl ={};
+    #destinationFilePath = '';
 
-    constructor(args) {
-        super();
-        if (args.length > 0) {
-            this.#destinationFilePath = this._getPathToFileFromArgs(args[0]);
+    set args (value) {
+        if (value.length > 0) {
+            this.#destinationFilePath = this._getPathToFileFromArgs(value[0]);
         }
+    }
+
+    set rl (value) {
+        this.#rl = value;
     }
 
     #isDirectoryOrFile = async (destinationPath) => {
         const stats = await stat(destinationPath);
         return stats.isDirectory() ? 'directory' : stats.isFile()
-            ? 'file' : 'unknown';
+                                   ? 'file' : 'unknown';
     };
+
+    #setReadline = () => {
+        this.#rl.setPrompt(this._colorize(`\nYou are currently in ${cwd()}\n`, 33));
+    }
 
     moveUp = async () => {
         const pathToUpperDirectory = path.join(cwd(), '..');
         process.chdir(pathToUpperDirectory);
-        console.log(cwd()) // !!!!!
-        //this._rl.setPrompt(`\nYou are currently in ${cwd()}\n`);
+        this.#setReadline();
     }
 
     changeDir = async () => {
-        process.chdir(this.#destinationFilePath);
-        console.log(this.#destinationFilePath) // !!!!!
-        //this._rl.setPrompt(`\nYou are currently in ${cwd()}\n`);
+        try {
+            process.chdir(this.#destinationFilePath);
+            this.#setReadline();
+        } catch (error) {
+            console.log(this._errMsgOperationFailed, error.message);
+        }
     }
 
     showList = async () => {
@@ -64,18 +74,10 @@ export class NavigationExecutor extends Executor {
 
             const tableData = [...sortedFolders, ...sortedFiles];
             console.table(tableData);
-
-            // ДОДЕЛАТЬ!!! После таблицы не показывает cwd()
-            // const rl = readline.createInterface({
-            //     input: process.stdin,
-            //     output: process.stdout,
-            //     prompt: colorize(`\nYou are currently in ${currentDir}\n`, 33)
-            //     //prompt: `\x1b[33m\nYou are currently in ${pathToHomeDirectory}\x1b[0m\n`
-            // });
-            // rl.prompt();
+            console.log('\n');
+            this.#rl.prompt();
         } catch (error) {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
         }
     }
 }

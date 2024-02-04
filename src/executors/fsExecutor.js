@@ -8,19 +8,25 @@ import { Executor } from './executor.js';
 
 export class FsExecutor extends Executor {
     #name = 'fs';
-    #args;
-    #sourcePath;
-    #destinationPath;
-    #sourceFileName;
+    #rl = {};
+    #sourcePath = '';
+    #destinationPath = '';
+    #sourceFileName = '';
 
-    constructor(args) {
-        super();
-        if (args.length >= 1) {
-            this.#args = args;
-            this.#sourcePath = this._getPathToFileFromArgs(args[0]);
-            this.#destinationPath = this._getPathToFileFromArgs(args[1]);
+    set args (value) {
+        if (value.length >= 1) {
+            this.#sourcePath = this._getPathToFileFromArgs(value[0]);
+            this.#destinationPath = this._getPathToFileFromArgs(value[1]);
             this.#sourceFileName = basename(this.#sourcePath);
+        } else {
+            this.#sourcePath = '';
+            this.#destinationPath = '';
+            this.#sourceFileName = '';
         }
+    }
+
+    set rl (value) {
+        this.#rl = value;
     }
 
     #isDestinationDirectory = async (destinationPath) => {
@@ -69,19 +75,18 @@ export class FsExecutor extends Executor {
                         this._colorize(' has been created in the current working directory.', 92);
             console.log(msg);
         } catch (error) {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
         }
     }
 
     createEmptyFile = async () => {
-        await this.#createFile(this.#args[0], '');
+        await this.#createFile(this.#sourceFileName, '');
+        this._prompt();
     }
 
     deleteFile = async () => {
         if (!this.#sourcePath) {
-            const msg = this._colorize('Invalid input', 91);
-            console.log(msg);
+            console.log(this._errMsgInvalidInput);
             return;
         }
         try {
@@ -92,13 +97,18 @@ export class FsExecutor extends Executor {
             const msg = this._colorize(this.#sourceFileName, 90) + ' \n' +
                         this._colorize('Delete complete.', 92);
             console.log(msg);
+            this._prompt();
         } catch (error) {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
+            this._prompt();
         }
     }
 
     copyFile = async () => {
+        if (!this.#sourcePath) {
+            console.log(this._errMsgInvalidInput);
+            return;
+        }
         try {
             await this.#checkIsDirectory(this.#destinationPath);
             await access(this.#sourcePath);
@@ -111,13 +121,18 @@ export class FsExecutor extends Executor {
                         this._colorize(this.#sourceFileName, 97) +
                         this._colorize(' complete.', 92);
             console.log(msg);
+            this._prompt();
         } catch (error) {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
+            this._prompt();
         }
     }
 
     moveFile = async () => {
+        if (!this.#sourcePath) {
+            console.log(this._errMsgInvalidInput);
+            return;
+        }
         try {
             await this.#checkIsDirectory(this.#destinationPath);
             await access(this.#sourcePath);
@@ -131,31 +146,39 @@ export class FsExecutor extends Executor {
                         this._colorize(this.#sourceFileName, 97) +
                         this._colorize(' transfer completed.', 92);
             console.log(msg);
+            this._prompt();
         } catch (error) {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
+            this._prompt();
         }
     }
 
     showFileContent = async () => {
-        const readStream = createReadStream(this.#sourcePath);
-        readStream.on('data', (chunk) => {
-            process.stdout.write(chunk + '\n');
-        });
-        readStream.on('error',(error) => {
-            const errMsg = this._colorize('File ', 31) +
-                           this._colorize(this.#sourceFileName, 97) +
-                           this._colorize(' read operation failed:', 31);
-            console.log(errMsg, error.message);
-        });
+        if (!this.#sourcePath) {
+            console.log(this._errMsgInvalidInput);
+            return;
+        }
+        try {
+            const readStream = createReadStream(this.#sourcePath);
+            readStream.on('data', (chunk) => {
+                const innerText = this._colorize(chunk, 92);
+                process.stdout.write(innerText + '\n');
+                this._prompt();
+            });
+            readStream.on('error',(error) => {
+                const errMsg = this._colorize('File ', 31) +
+                               this._colorize(this.#sourceFileName, 97) +
+                               this._colorize(' read operation failed:', 31);
+                console.log(errMsg, error.message);
+                this._prompt();
+            });
+        } catch (error) {
+            console.log(this._errMsgOperationFailed, error.message);
+            this._prompt();
+        }
     }
 
     renameFile = async () => {
-        // if (!this.#destinationPath) {
-        // const msg = this._colorize('Invalid input', 91);
-        //     console.log(msg);
-        //     return;
-        // }
         try {
             const __dirname = path.dirname(this.#sourcePath);
             const destinationFileName = basename(this.#destinationPath);
@@ -166,18 +189,14 @@ export class FsExecutor extends Executor {
                         this._colorize(' to ', 92) +
                         this._colorize(destinationFileName, 97) +
                         this._colorize(' completed.', 92);
-            console.log(msg)
+            console.log(msg);
+            this._prompt();
         } catch (error) {
             const errMsg = this._colorize('File ', 31) +
                            this._colorize(this.#sourceFileName, 97) +
                            this._colorize(' rename operation failed:', 31);
             console.log(errMsg, error.message);
+            this._prompt();
         }
     }
 }
-
-// compress fileForHash.txt ./src/executors/files/some.gz
-
-
-
-

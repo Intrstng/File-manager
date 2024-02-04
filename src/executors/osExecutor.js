@@ -1,4 +1,3 @@
-import { basename } from 'path';
 import process from 'node:process';
 import os from 'node:os';
 import { Executor } from './executor.js';

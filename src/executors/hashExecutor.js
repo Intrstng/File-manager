@@ -1,22 +1,21 @@
 import { createReadStream } from 'node:fs';
 const { createHash } = await import('node:crypto');
 import { Executor } from './executor.js';
+import process, {cwd} from 'node:process';
 
 export class HashExecutor extends Executor {
     #name = 'hash';
-    #destinationFilePath;
+    #destinationFilePath = '';
 
-    constructor(args) {
-        super();
-        if (args.length > 0) {
-            this.#destinationFilePath = this._getPathToFileFromArgs(args[0]);
+    set args (value) {
+        if (value.length > 0) {
+            this.#destinationFilePath = this._getPathToFileFromArgs(value[0]);
         }
     }
 
     calculateHash = async () => {
         if (!this.#destinationFilePath) {
-            const msg = this._colorize('Invalid input', 91);
-            console.log(msg);
+            console.log(this._errMsgInvalidInput);
             return;
         }
         const hash = createHash('sha256');
@@ -29,12 +28,13 @@ export class HashExecutor extends Executor {
             else {
                 const calculatedHash = hash.digest('hex');
                 console.log(calculatedHash);
+                this._prompt();
             }
         });
 
         input.on('error', (error) => {
-            const errMsg = this._colorize('Operation failed:', 31);
-            console.log(errMsg, error.message);
+            console.log(this._errMsgOperationFailed, error.message);
+            this._prompt();
         });
     };
 }

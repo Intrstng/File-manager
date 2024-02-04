@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1d8bfbf-4980-4da5-a653-f81f55aa112f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1/1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileForHash.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/text.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/fileForCompress.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/executor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/executor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/files/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/fileForHash.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/fsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/fsExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/hashExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/hashExecutor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/executors/navigationExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/navigationExecutor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/executors/osExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/osExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/router.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/zlibExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/zlibExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/colorize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/getUserNameFromArgs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getUserNameFromArgs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/toConsole.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,13 +50,19 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Projects/ITIncubator/Node.js/1.Simple express app with typescript and nodemon/lesson",
+    "last_opened_file_path": "D:/Projects/RSSchool/NodeJS/2.week/BackUp_HW__File_manager_task/03.02.2024/File_manager_task",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task\src\data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task\src\controller" />
+      <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task\src\executors" />
+      <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task\src\data" />
       <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task\1" />
       <recent name="D:\Projects\RSSchool\NodeJS\2.week\File_manager_task" />
     </key>
@@ -57,7 +78,9 @@
       <workItem from="1706690598399" duration="33000" />
       <workItem from="1706690638588" duration="26032000" />
       <workItem from="1706774720905" duration="25040000" />
-      <workItem from="1706818228323" duration="54286000" />
+      <workItem from="1706818228323" duration="67244000" />
+      <workItem from="1707037318347" duration="4968000" />
+      <workItem from="1707042612064" duration="13720000" />
     </task>
     <servers />
   </component>
