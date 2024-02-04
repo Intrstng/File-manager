@@ -1,0 +1,4 @@
+You can also use this file to calculate hash.
+
+hash ./....
+with the path to this file.
