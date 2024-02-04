@@ -4,12 +4,6 @@
     <list default="true" id="b1d8bfbf-4980-4da5-a653-f81f55aa112f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/FsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/FsExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/HashExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/HashExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/NavigationExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/NavigationExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/OsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/OsExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/ZlibExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/ZlibExecutor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +64,7 @@
       <workItem from="1706774720905" duration="25040000" />
       <workItem from="1706818228323" duration="67244000" />
       <workItem from="1707037318347" duration="4968000" />
-      <workItem from="1707042612064" duration="17973000" />
+      <workItem from="1707042612064" duration="18689000" />
     </task>
     <servers />
   </component>

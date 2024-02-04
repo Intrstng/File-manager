@@ -2,14 +2,14 @@
 ## Task
 [_File Manager - Task RS School **Node.js** course_](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md)
 ### _Description_
-Your task is to implement File Manager using **Node.js** APIs.
-The file manager should be able to do the following:
-- Work using CLI
-- Perform basic file operations (copy, move, delete, rename, etc.)
-- Utilize Streams API
-- Get information about the host machine operating system
-- Perform hash calculations
-- Compress and decompress files
+Implementation of a file manager using the **Node.js** API.
+File manager capabilities:
+- Works using CLI
+- Performs basic file operations (copy, move, delete, rename, etc.)
+- Uses the Streams API
+- Gets information about the host machine operating system
+- Performs hash calculations
+- Compresses and decompresses files
 ### _List of operations and their syntax:_
 The program is started by npm-script start in following way:
 ```sh
@@ -24,10 +24,10 @@ up
 ```sh
 cd path_to_directory
 ```
-- Print in console list of all files and folders in current directory. List should contain:
-    * _list should contain files and folder names (for files - with extension)_
+- Print in console list of all files and folders in current directory. List contains:
+    * _list contains files and folder names (for files - with extension)_
     * _folders and files are sorted in alphabetical order ascending, but list of folders goes first_
-    * _type of directory content should be marked explicitly (e.g. as a corresponding column value)_
+    * _type of directory content is marked explicitly (e.g. as a corresponding column value)_
 ```sh
 ls
 ```
@@ -88,12 +88,12 @@ os --architecture
 hash path_to_file
 ```
 5. **Compress and decompress operations**
-- Compress file (using Brotli algorithm, should be done using _Streams API_)
+- Compress file (using Brotli algorithm, is done using _Streams API_)
 ```sh
 compress path_to_file path_to_destination
 ```
-- Decompress file (using Brotli algorithm, should be done using _Streams API_)
+- Decompress file (using Brotli algorithm, is done using _Streams API_)
 ```sh
 decompress path_to_file path_to_destination
 ```
-_NB! After decompressing of previously compressed file result should not differ with originally compressed file_
+_NB! After decompressing a previously compressed file, the result is no different from the originally compressed file_
