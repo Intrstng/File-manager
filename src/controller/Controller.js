@@ -1,14 +1,14 @@
-import {getUserNameFromArgs} from '../utils/getUserNameFromArgs.js';
-import {parseInputArguments} from '../utils/parseInputArguments.js';
+import { getUserNameFromArgs } from '../utils/getUserNameFromArgs.js';
+import { parseInputArguments } from '../utils/parseInputArguments.js';
 import path from 'path';
 import * as readline from 'node:readline/promises';
 import os from 'os';
 import process from 'node:process';
-import { HashExecutor } from '../executors/hashExecutor.js';
-import { ZlibExecutor } from '../executors/zlibExecutor.js';
-import { FsExecutor } from '../executors/fsExecutor.js';
-import {OsExecutor} from '../executors/osExecutor.js';
-import {NavigationExecutor} from '../executors/navigationExecutor.js';
+import { HashExecutor } from '../executors/HashExecutor.js';
+import { ZlibExecutor } from '../executors/ZlibExecutor.js';
+import { FsExecutor } from '../executors/FsExecutor.js';
+import { OsExecutor } from '../executors/OsExecutor.js';
+import { NavigationExecutor } from '../executors/NavigationExecutor.js';
 
 export class Controller {
     #rl;
@@ -17,14 +17,14 @@ export class Controller {
     #zlib;
     #os;
     #nav;
-
-    #startCLI = async () => {
+    constructor() {
         this.#fs = new FsExecutor();
         this.#hash = new HashExecutor();
         this.#zlib = new ZlibExecutor();
         this.#os = new OsExecutor();
         this.#nav = new NavigationExecutor();
-
+    }
+    #startCLI = async () => {
         const userName = await getUserNameFromArgs();
         // Define system disk
         const systemDrive = os.platform() === 'win32' ? process.env.SystemDrive : '/';
@@ -71,7 +71,6 @@ export class Controller {
 
     #router = (inputArgs) => {
         const [action, ...args] = inputArgs;
-
         this.#hash.args = args;
         this.#zlib.args = args;
         this.#fs.args = args;
@@ -79,8 +78,8 @@ export class Controller {
         this.#os.args = args;
         this.#nav.args = args;
         this.#nav.rl = this.#rl;
-
         const errMsg = this.#colorize('Invalid input', 91);
+
         const commands = {
             // fs
             'cat': this.#fs.showFileContent,

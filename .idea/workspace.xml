@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1d8bfbf-4980-4da5-a653-f81f55aa112f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controller/Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1/1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileForHash.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/text.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/fileForCompress.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/executor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/executor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/files/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/fileForHash.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/fsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/fsExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/hashExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/hashExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/navigationExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/navigationExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/osExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/osExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/router.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/executors/zlibExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/zlibExecutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/colorize.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/getUserNameFromArgs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getUserNameFromArgs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toConsole.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/toConsole.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/FsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/FsExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/HashExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/HashExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/NavigationExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/NavigationExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/OsExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/OsExecutor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/executors/ZlibExecutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/executors/ZlibExecutor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +70,7 @@
       <workItem from="1706774720905" duration="25040000" />
       <workItem from="1706818228323" duration="67244000" />
       <workItem from="1707037318347" duration="4968000" />
-      <workItem from="1707042612064" duration="13720000" />
+      <workItem from="1707042612064" duration="17973000" />
     </task>
     <servers />
   </component>

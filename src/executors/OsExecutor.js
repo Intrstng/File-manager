@@ -1,6 +1,6 @@
 import process from 'node:process';
 import os from 'node:os';
-import { Executor } from './executor.js';
+import { Executor } from './Executor.js';
 
 export class OsExecutor extends Executor {
     #name = 'os';
@@ -42,10 +42,3 @@ export class OsExecutor extends Executor {
         process.stdout.write(architecture);
     }
 }
-
-// os --EOL --cpus --homedir --username --architecture
-
-
-
-
-

@@ -1,9 +1,8 @@
-import {createReadStream, createWriteStream} from 'node:fs';
-import {access} from 'node:fs';
-import {createBrotliCompress, createBrotliDecompress} from 'node:zlib';
-import {pipeline} from 'stream';
-import {Executor} from './executor.js';
-
+import { createReadStream, createWriteStream } from 'node:fs';
+import { access } from 'node:fs';
+import { createBrotliCompress, createBrotliDecompress } from 'node:zlib';
+import { pipeline } from 'stream';
+import { Executor } from './Executor.js';
 
 export class ZlibExecutor extends Executor {
     #name = 'zlib';
@@ -40,7 +39,6 @@ export class ZlibExecutor extends Executor {
                 const compressDecompressStream = action === 'Compression'
                                                 ? createBrotliCompress()
                                                 : createBrotliDecompress();
-
                 pipeline(readStream, compressDecompressStream, writeStream, (error) => {
                     if (error) {
                         console.error(this._errMsgOperationFailed, error.message);

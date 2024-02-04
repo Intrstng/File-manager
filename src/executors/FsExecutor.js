@@ -4,7 +4,7 @@ import { rm, access, stat } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import fs from 'fs/promises';
 import { pipeline } from 'node:stream/promises';
-import { Executor } from './executor.js';
+import { Executor } from './Executor.js';
 
 export class FsExecutor extends Executor {
     #name = 'fs';

@@ -1,7 +1,7 @@
 import path from 'path';
-import {readdir, stat} from 'node:fs/promises';
-import process, {cwd} from 'node:process';
-import {Executor} from './executor.js';
+import { readdir, stat } from 'node:fs/promises';
+import process, { cwd } from 'node:process';
+import { Executor } from './Executor.js';
 
 export class NavigationExecutor extends Executor {
     #name = 'navigation';
@@ -47,7 +47,6 @@ export class NavigationExecutor extends Executor {
         try {
             const currentDir = cwd();
             const items = await readdir(currentDir);
-
             const files = [];
             const folders = [];
 
@@ -81,20 +80,3 @@ export class NavigationExecutor extends Executor {
         }
     }
 }
-
-// \x1b[30m: Black
-// \x1b[31m: Red
-// \x1b[32m: Green
-// \x1b[33m: Yellow
-// \x1b[34m: Blue
-// \x1b[35m: Magenta
-// \x1b[36m: Cyan
-// \x1b[37m: White
-// \x1b[90m: Bright black (gray)
-// \x1b[91m: Bright red
-// \x1b[92m: Bright green
-// \x1b[93m: Bright yellow
-// \x1b[94m: Bright blue
-// \x1b[95m: Bright magenta
-// \x1b[96m: Bright cyan
-// \x1b[97m: Bright white

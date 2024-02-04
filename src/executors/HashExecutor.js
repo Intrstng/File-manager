@@ -1,7 +1,6 @@
 import { createReadStream } from 'node:fs';
 const { createHash } = await import('node:crypto');
-import { Executor } from './executor.js';
-import process, {cwd} from 'node:process';
+import { Executor } from './Executor.js';
 
 export class HashExecutor extends Executor {
     #name = 'hash';
