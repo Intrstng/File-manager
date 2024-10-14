@@ -63,7 +63,7 @@ export class Controller {
         this.#rl.on('SIGINT', () => {
             const exitPhrase =  this.#colorize('Thank you for using File Manager, ', 31) +
                                 this.#colorize(userName, 94) +
-                                this.#colorize(' goodbye!', 31);
+                                this.#colorize(', goodbye!', 31);
             console.log(exitPhrase);
             process.exit(0);
         });
