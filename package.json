@@ -2,6 +2,9 @@
   "name": "File_manager",
   "version": "1.0.0",
   "description": "RSSchool task",
+  "engines": {
+    "node": ">=22.9.0"
+  },
   "main": "index.js",
   "type": "module",
   "scripts": {
